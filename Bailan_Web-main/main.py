@@ -65,8 +65,8 @@ async def search_book_by_booknameandwriter(name:str, writer_name:str) -> dict:
 async def search_book(book_name:str = None, writer_name:str = None , type:str = None) -> dict:
     return {"Book's List" : controller.search_book(book_name,writer_name,type)}
 
-# print(controller.search_book_by_bookname("Great Book"))
-# print(controller.search_book_by_writer("write"))
-# print(controller.search_book_by_booknameandwriter("Great Book","write"))
-# print(controller.search_book_by_type("Fiction"))
-# print(controller.search_book( None,None ,"Fiction"))
+print(controller.search_book_by_bookname("Great Book"))
+print(controller.search_book_by_writer("write"))
+print(controller.search_book_by_booknameandwriter("Great Book","write"))
+print(controller.search_book_by_type("Fiction"))
+print(controller.search_book( None,None ,"Fiction"))
