@@ -87,29 +87,23 @@ async def upload_book(writer_name: str, writer_password: str, writer_id: int, bo
     book = Book(book_detail.name,writer_info,book_detail.book_type,book_detail.price_coin,book_detail.intro,book_detail.content)
     controller.add_book(book)
     return {f"message": "Upload Book Success"}
+    #return {"Book's list" : controller.book_of_writer(writer_name)}
 
-@app.get("/ShowBookWhenUploadBook", tags=["Book"])
-async def show_book_when_upload_book(writer: str) -> dict:
-    for book in upload:
-        new_book_collection = []
-        if book['writer'] == writer:
-            format_book = {
-                "Name": book["name"],
-                "Writer": book["writer"],
-                "Book Type": book["book_type"],
-                "Price Coin": book["price_coin"],
-                "Intro": book["intro"],
-                "Content": book["content"]
-            }
-        new_book_collection.append(format_book)
-
-    if new_book_collection:
-        return {"Book's List": new_book_collection}
-    else:
-        return {"Error": "Writer not found"}
+@app.get("/ShowBookWhenUploadBook", tags=["Book"]) #ดูคลังหนังสือที่ตัวเองแต่ง
+async def show_book_when_upload_book(writer_name: str) -> dict:
+    return {"Book's list" : controller.book_of_writer(writer_name)}
     
 # print(controller.search_book_by_bookname("Great Book"))
 # print(controller.search_book_by_writer("write"))
 # print(controller.search_book_by_booknameandwriter("Great Book","write"))
 # print(controller.search_book_by_type("Fiction"))
 # print(controller.search_book( None,None ,"Fiction"))
+
+# {
+#     "Name": book["name"],
+#     "Writer": book["writer"],
+#     "Book Type": book["book_type"],
+#     "Price Coin": book["price_coin"],
+#     "Intro": book["intro"],
+#     "Content": book["content"]
+# }

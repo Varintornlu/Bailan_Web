@@ -174,3 +174,14 @@ class Controller:
     #     self.__book_list.append(book)
     #     writer.book_collection_list.append(book)
     #     return "Success"
+
+    def book_of_writer(self,writer): #คลังหนังสือที่ตัวเองแต่ง
+        new_book_list = []
+        for book in self.__book_list:
+            if book.writer.account_name == writer:
+                format = [f'Book Name: {book.name}' , f'Writer Name: {book.writer.account_name}' , f'Type of Book: {book.book_type}' , f'Price Coin: {book.price_coin}' , f'Intro: {book.intro}' , f'Content: {book.content}']
+                new_book_list.append(format)
+        if new_book_list:
+            return new_book_list
+        else:
+            return None
