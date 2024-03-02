@@ -43,7 +43,7 @@ class Controller:
     def add_complain(self, complain):
         self.__complain_list.append(complain)
 
-    def add_book(self, book):
+    def add_book(self, book): #UploadBook
         self.__book_list.append(book)
 
     def add_payment_method(self, payment_method):

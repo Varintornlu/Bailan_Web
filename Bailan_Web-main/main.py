@@ -78,7 +78,6 @@ class Uploadbook(BaseModel):
     content: str
 
 upload = []
-new_book_collection = []
 
 @app.post("/upload_book", tags=["Book"])
 async def upload_book(writer_name: str, writer_password: str, writer_id: int, book_detail: Uploadbook) -> dict:
@@ -87,11 +86,12 @@ async def upload_book(writer_name: str, writer_password: str, writer_id: int, bo
     upload.append(book_detail.dict())
     book = Book(book_detail.name,writer_info,book_detail.book_type,book_detail.price_coin,book_detail.intro,book_detail.content)
     controller.add_book(book)
-    return {"message": "Upload Book Success"}
+    return {f"message": "Upload Book Success"}
 
 @app.get("/ShowBookWhenUploadBook", tags=["Book"])
 async def show_book_when_upload_book(writer: str) -> dict:
     for book in upload:
+        new_book_collection = []
         if book['writer'] == writer:
             format_book = {
                 "Name": book["name"],
@@ -101,7 +101,7 @@ async def show_book_when_upload_book(writer: str) -> dict:
                 "Intro": book["intro"],
                 "Content": book["content"]
             }
-            new_book_collection.append(format_book)
+        new_book_collection.append(format_book)
 
     if new_book_collection:
         return {"Book's List": new_book_collection}
