@@ -1,3 +1,4 @@
+from Book_class import Book
 class Account:
     def __init__(self, account_name, password, id_account):
         self.__account_name = account_name
@@ -22,7 +23,6 @@ class Account:
     @property
     def coin(self):
         return self.__coin
-    
     
     @property
     def payment_history_list(self):
@@ -83,9 +83,9 @@ class Writer(Account):
         self.__book_collection_list = []
         self.__money = 0
 
-    @property
-    def book_for_upload(self):
-        return self.__book_for_upload
+    # @property
+    # def book_for_upload(self):
+    #     return self.__book_for_upload
 
     @property
     def incoming_coin(self):
@@ -93,7 +93,12 @@ class Writer(Account):
 
     @property
     def book_collection_list(self):
-        return self.book_collection_list
+        return self.__book_collection_list
+    
+    @book_collection_list.setter
+    def book_collection_list(self,name, writer, book_type, price_coin, intro, content):
+        book = Book(name, writer, book_type, price_coin, intro, content)
+        self.__book_collection_list.append(book)
     
     @property
     def money(self):
@@ -104,9 +109,6 @@ class Writer(Account):
         self.__money += money
 
     def get_review(self):
-        pass
-
-    def upload_book(self):
         pass
 
     def update_book_collection_list(self):

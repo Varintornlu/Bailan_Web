@@ -55,8 +55,11 @@ class Controller:
             if book.name == bookname or bookname in book.name:
                 format = [f'Book Name: {book.name}' , f'Writer Name: {book.writer.account_name}' , f'Type of Book: {book.book_type}']
                 new_book_list.append(format)
-                return new_book_list
-        return None
+        if new_book_list:
+            return new_book_list
+        else:
+            return None
+
     
     def search_book_by_writer(self, writer):
         new_book_list = []
@@ -166,3 +169,8 @@ class Controller:
                 return True
         return False
     
+    # def upload_book(self,name, writer, book_type, price_coin, intro, content):
+    #     book = Book(name, writer, book_type, price_coin, intro, content)
+    #     self.__book_list.append(book)
+    #     writer.book_collection_list.append(book)
+    #     return "Success"

@@ -1,7 +1,7 @@
 class Book:
-    def __init__(self, name,id, writer, book_type, price_coin, intro, content):
+    def __init__(self, name,writer, book_type, price_coin, intro, content):
         self.__name = name
-        self.__id = id
+        self.__id = 0
         self.__writer = writer
         self.__book_type = book_type
         self.__price_coin = price_coin
@@ -22,6 +22,10 @@ class Book:
     @property
     def id(self):
         return self.__id
+    
+    @id.setter
+    def id(self):
+        self.__id += 1
 
     @property
     def writer(self):
