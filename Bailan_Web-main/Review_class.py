@@ -32,7 +32,6 @@ class Review:
         
     def show_comment(self):
         format = []
-        for account_name, comment, date_time in self.__comment_list:
-            account_name = reader.account_name
-            format.append(f"{account_name} account : {comment} on {date_time}")
+        for account, comment, date_time in self.__comment_list:
+            format.append(f"{account.account_name} account : {comment} on {date_time}")
         return format

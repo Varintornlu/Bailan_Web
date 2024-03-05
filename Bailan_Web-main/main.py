@@ -157,13 +157,15 @@ class Uploadbook(BaseModel):
 @app.post("/upload_book", tags=["Upload Book"])
 async def upload_book(writer_name: str, writer_password: str, book_detail: Uploadbook) -> dict:
     writer_info = Writer(writer_name, writer_password)
+    writer_id = Writer.id_account
     book_detail.writer = writer_name
     #upload.append(book_detail.dict())
     book = Book(book_detail.name,book_detail.book_type,book_detail.price_coin,book_detail.intro,book_detail.content)
     book.writer = writer_info
     controller.add_book(book)
-    return {f"message": "Upload Book Success"}
-    # return {"Book's list" : controller.book_of_writer(writer_name)}
+    # return {f"message": "Upload Book Success"}
+    return {"Book's list" : controller.book_of_writer(writer_id)}
+
 
 
 # @app.get("/ShowBookWhenUploadBook", tags=["Writer's Book"]) #ดูคลังหนังสือที่ตัวเองแต่ง ใช้ไม่ได้
@@ -178,16 +180,13 @@ async def Show_Book_Collection_of_Reader(Reader_id:int) -> dict:
 async def show_coin_transaction(ID:int) -> dict:
     return{"Coin Transaction's List" : controller.cointrasaction_history(ID)}
 
-# class Comment(BaseModel):
-#     comment : str
+@app.post("/Comment",tags = ["Comment"])
+async def submit_comment(Reader_id : int , Book_id : int, comment : str) -> dict:
+    return{"result" : controller.submit_comment(Reader_id,Book_id,comment)}
 
-# @app.post("/Comment",tags = ["Comment"])
-# async def submit_comment(Reader_id : int , Book_id : str,comment : Comment) -> dict:
-#     return{"result" : controller.submit_comment(Reader_id,Book_id,comment)}
-
-# @app.get("/View Comment of Book", tags=["Comment"])
-# async def view_comment(Book_id : str) -> dict:
-#     return{"Comment's list" : controller.view_comment(Book_id)}
+@app.get("/View Comment of Book", tags=["Comment"])
+async def view_comment(Book_id : int) -> dict:
+    return{"Comment's list" : controller.view_comment(Book_id)}
 # print(controller.search_book_by_bookname("Great Book"))
 # print(controller.search_book_by_writer("write"))
 # print(controller.search_book_by_booknameandwriter("Great Book","write"))
@@ -215,5 +214,5 @@ async def show_coin_transaction(ID:int) -> dict:
 #             #format = [f'Book Name: {list.name}' , f'Writer Name: {list.writer.account_name}' , f'Type of Book: {list.book_type}' , f'Price Coin: {list.price_coin}' , f'Intro: {list.intro}' , f'Content: {list.content}']    
 #             print(list.writer)    
 # print(controller.cointrasaction_history(1))
-# print(controller.submit_comment(1,1,"Bad Book"))
-# print(controller.view_comment(2))
+print(controller.submit_comment(1,1,"Bad Book"))
+print(controller.view_comment(1))

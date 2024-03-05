@@ -216,35 +216,35 @@ class Controller:
         self.__book_list.append(book)
         writer.book_collection_list.append(book)
 
-    def book_of_writer(self,writer): #คลังหนังสือที่ตัวเองแต่ง ID
-        new_book_list = []
-        for book in self.__book_list:
-            if book.writer.account_name == writer:
-                format = [f'Book Name: {book.name}' , f'Writer Name: {book.writer.account_name}' , f'Type of Book: {book.book_type}' , f'Price Coin: {book.price_coin}' , f'Intro: {book.intro}' , f'Content: {book.content}']
-                new_book_list.append(format)
-        if new_book_list:
-            return new_book_list
-        else:
-            return None
+    def book_of_writer(self,writer): #คลังหนังสือที่ตัวเองแต่ง ID มีปัญหา
         # new_book_list = []
-
-        # writer_account = self.search_writer(writer)
-    
-        # if writer_account is not None:
-        #     for book in writer_account.book_collection_list:
-        #         book_format = [
-        #             f'Book Name: {book.name}',
-        #             f'Writer Name: {book.writer.account_name}',
-        #             f'Type of Book: {book.book_type}',
-        #             f'Price Coin: {book.price_coin}',
-        #             f'Intro: {book.intro}',
-        #             f'Content: {book.content}'
-        #         ]
-        #         new_book_list.append(book_format)
-
+        # for book in self.__book_list:
+        #     if book.writer.account_name == writer:
+        #         format = [f'Book Name: {book.name}' , f'Writer Name: {book.writer.account_name}' , f'Type of Book: {book.book_type}' , f'Price Coin: {book.price_coin}' , f'Intro: {book.intro}' , f'Content: {book.content}']
+        #         new_book_list.append(format)
+        # if new_book_list:
         #     return new_book_list
+        # else:
+        #     return None
+        new_book_list = []
 
-        # return []
+        writer_account = self.search_writer(writer)
+    
+        if writer_account is not None:
+            for book in writer_account.book_collection_list:
+                book_format = [
+                    f'Book Name: {book.name}',
+                    f'Writer Name: {book.writer.account_name}',
+                    f'Type of Book: {book.book_type}',
+                    f'Price Coin: {book.price_coin}',
+                    f'Intro: {book.intro}',
+                    f'Content: {book.content}'
+                ]
+                new_book_list.append(book_format)
+
+            return new_book_list
+
+        return "Not Found"
             
         
     def transfer(self, writer_id, coin):
@@ -386,10 +386,8 @@ class Controller:
 
         if book is not None:
             comments = book.review.show_comment() 
-            comment_list.extend(comments)
-
-        if comment_list:
+            comment_list.append(comments)
             return comment_list
-        else:
-            return "Not have comment"
+        
+        return "Not have comment"
 
