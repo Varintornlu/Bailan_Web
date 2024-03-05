@@ -1,9 +1,11 @@
 class BookStatus:
-    def __init__(self, start_date, end_date, status, book):
+    def __init__(self, start_date, end_date, status):
         self.__start_date = start_date
         self.__end_date = end_date
         self.__status = status
-        self.__book = book
+        
+    def __str__(self):
+        return f'You rent this book since {self.__start_date} and end with {self.__end_date}'
 
     @property
     def start_date(self):
@@ -28,7 +30,3 @@ class BookStatus:
     @status.setter
     def status(self, new_status):
         self.__status = new_status
-
-    @property
-    def book(self):
-        return self.__book
