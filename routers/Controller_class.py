@@ -227,24 +227,11 @@ class Controller:
         # else:
         #     return None
         new_book_list = []
+        for book in writer.book_collection_list:
+            format = [f'Book Name: {book.name}' , f'Writer Name: {book.writer.account_name}' , f'Type of Book: {book.book_type}' , f'Price Coin: {book.price_coin}' , f'Intro: {book.intro}' , f'Content: {book.content}']
+            new_book_list.append(format)
 
-        writer_account = self.search_writer(writer)
-    
-        if writer_account is not None:
-            for book in writer_account.book_collection_list:
-                book_format = [
-                    f'Book Name: {book.name}',
-                    f'Writer Name: {book.writer.account_name}',
-                    f'Type of Book: {book.book_type}',
-                    f'Price Coin: {book.price_coin}',
-                    f'Intro: {book.intro}',
-                    f'Content: {book.content}'
-                ]
-                new_book_list.append(book_format)
-
-            return new_book_list
-
-        return "Not Found"
+        return new_book_list
             
         
     def transfer(self, writer_id, coin):

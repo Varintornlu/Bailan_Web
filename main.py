@@ -10,6 +10,7 @@ from routers.Book_class import Book
 from routers.Review_class import Review
 from routers.Promotion_class import Promotion
 from routers.Coin_transection_class import Coin_transaction
+from model.basemodel import Uploadbook
 
 app = FastAPI()
 
@@ -144,13 +145,7 @@ async def search_book(book_name:str = None, writer_name:str = None , type:str = 
     return {"Book's List" : controller.search_book(book_name,writer_name,type)}
 
 
-class Uploadbook(BaseModel):
-    name: str
-    #writer: str 
-    book_type: str
-    price_coin: int
-    intro: str
-    content: str
+
 
 #upload = []
 
@@ -221,4 +216,5 @@ async def view_comment(Book_id : int) -> dict:
 # print(controller.cointrasaction_history(1))
 print(controller.submit_comment(1,1,"Bad Book"))
 print(controller.view_comment(1))
+print(writer1.id_account)
 
