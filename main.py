@@ -160,7 +160,7 @@ async def search_book(book_name:str = None, writer_name:str = None , type:str = 
 #     controller.add_book(book)
 #     # return {f"message": "Upload Book Success"}
 #     return {"Book's list" : controller.book_of_writer(writer_id)}
-@app.post("/Upload Book",tags = ["Upload Book"]) #Error
+@app.post("/Upload_Book",tags = ["Upload Book"]) #Error
 async def upload_book(writer_id : int , book_detail : Uploadbook) -> dict:
     if controller.search_writer(writer_id) is not None:
         writer = controller.search_writer(writer_id)
@@ -168,7 +168,7 @@ async def upload_book(writer_id : int , book_detail : Uploadbook) -> dict:
     controller.upload_book(book,writer)
     return {"Book's List" : controller.book_of_writer(writer)}
 
-@app.get("/ShowBookWhenUploadBook", tags=["Writer's Book"]) #ดูคลังหนังสือที่ตัวเองแต่ง
+@app.get("/Show_Book_When_Upload_Book", tags=["Writer's Book"]) #ดูคลังหนังสือที่ตัวเองแต่ง
 async def show_book_when_upload_book(writer_id: int) -> dict:
     if controller.search_writer(writer_id) is not None:
         writer = controller.search_writer(writer_id)
@@ -186,7 +186,7 @@ async def show_coin_transaction(ID:int) -> dict:
 async def submit_comment(Reader_id : int , Book_id : int, comment : str) -> dict:
     return{"result" : controller.submit_comment(Reader_id,Book_id,comment)}
 
-@app.get("/View Comment of Book", tags=["Comment"])
+@app.get("/View_Comment_of_Book", tags=["Comment"])
 async def view_comment(Book_id : int) -> dict:
     return{"Comment's list" : controller.view_comment(Book_id)}
 # print(controller.search_book_by_bookname("Great Book"))
