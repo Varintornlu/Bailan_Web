@@ -1,5 +1,5 @@
 import ttkbootstrap as ttk
-# import tkinter as tk
+import tkinter as tk
 from ttkbootstrap import Style
 from ttkbootstrap.constants import *
 from tkinter import *
@@ -93,8 +93,23 @@ def search_function():
     # Do something with the search query, for example, print it
     print("Search Query:", search_query)
 
+    search_window = ttk.Toplevel(root)
+    search_window.title("Search Book")
+    search_window.geometry(f"{root.winfo_screenwidth()}x{root.winfo_screenheight()}")
+
+    label_title1 = ttk.Label(search_window,text="ค้นหาด้วยชื่อหนังสือ",font=("Helvetica", 20, "bold"))
+    label_title1.pack(pady=30,padx=30)
+    
+    label_title2 = ttk.Label(search_window,text = "ค้นหาด้วยชื่อผู้แต่ง",font=("Helvetica", 20, "bold"))
+    label_title2.pack(pady=30,padx=30)
+
+    label_title3 = ttk.Label(search_window,text = "ประเภทหนังสือ",font=("Helvetica", 20, "bold"))
+    label_title3.pack(pady=30,padx=30)
+
+
 button_search = ttk.Button(search_frame, text="ค้นหา", width=5, command=search_function)
 button_search.pack(side=LEFT)
+
 
 def view_profile():
     # สร้างเมนูบัตรเลือก

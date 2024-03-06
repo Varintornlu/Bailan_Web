@@ -11,8 +11,28 @@ from routers.Review_class import Review
 from routers.Promotion_class import Promotion
 from routers.Coin_transection_class import Coin_transaction
 from model.basemodel import Uploadbook
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:5500",
+    "localhost:5500",
+    "http://127.0.0.1:5500",
+    "127.0.0.1:5500/"
+]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
@@ -116,8 +136,9 @@ reader1.update_book_collection_list(book2)
 writer1.adding_coin = 10
 reader1.adding_coin = 2000
 
-reader1.update_coin_transaction_history_list(50000,5567,"Rent")
-reader1.update_coin_transaction_history_list(600,898,"Transfer")
+reader1.update_coin_transaction_history_list(50000,6324,"Rent")
+reader1.update_coin_transaction_history_list(600,6324,"Transfer")
+
 # ------------------------------------------
 
 # @app.get("/bookinfo", tags=['Book'])
@@ -126,23 +147,23 @@ reader1.update_coin_transaction_history_list(600,898,"Transfer")
 
 @app.get("/searchbookname", tags = ["Search Book"])
 async def search_book_by_bookname(name:str) -> dict:
-    return {"Book's List" : controller.search_book_by_bookname(name)}
+    return {"book_list" : controller.search_book_by_bookname(name)}
     
 @app.get("/searchwriter", tags = ["Search Book"])
 async def search_book_by_writer(name:str) -> dict:
-    return {"Book's List" : controller.search_book_by_writer(name)}
+    return {"book_list" : controller.search_book_by_writer(name)}
 
 @app.get("/searchtype", tags = ["Search Book"])
 async def search_book_by_type(name:str) -> dict:
-    return {"Book's List" : controller.search_book_by_type(name)}
+    return {"book_list" : controller.search_book_by_type(name)}
 
 @app.get("/searchbooknameandwriter", tags = ["Search Book"])
 async def search_book_by_booknameandwriter(name:str, writer_name:str) -> dict:
-    return {"Book's List" : controller.search_book_by_booknameandwriter(name,writer_name)}
+    return {"book_list" : controller.search_book_by_booknameandwriter(name,writer_name)}
 
 @app.get("/searchbook", tags = ["Search Book"])
 async def search_book(book_name:str = None, writer_name:str = None , type:str = None) -> dict:
-    return {"Book's List" : controller.search_book(book_name,writer_name,type)}
+    return {"book_list" : controller.search_book(book_name,writer_name,type)}
 
 
 

@@ -83,7 +83,12 @@ class Controller:
         new_book_list = []
         for book in self.__book_list:
             if book.name == bookname or bookname in book.name:
-                format = [f'Book Name: {book.name}' , f'Writer Name: {book.writer.account_name}' , f'Type of Book: {book.book_type}']
+                # format = [f'Book Name: {book.name}' , f'Writer Name: {book.writer.account_name}' , f'Type of Book: {book.book_type}']
+                format = {
+                    "book_name" : book.name,
+                    "writer_name " : book.writer.account_name,
+                    "type_book" : book.book_type
+                }
                 new_book_list.append(format)
         if new_book_list:
             return new_book_list
@@ -216,7 +221,7 @@ class Controller:
         self.__book_list.append(book)
         writer.book_collection_list.append(book)
 
-    def book_of_writer(self,writer): #คลังหนังสือที่ตัวเองแต่ง ID มีปัญหา
+    def book_of_writer(self,writer): #คลังหนังสือที่ตัวเองแต่ง ID 
         # new_book_list = []
         # for book in self.__book_list:
         #     if book.writer.account_name == writer:
@@ -232,7 +237,7 @@ class Controller:
             new_book_list.append(format)
 
         return new_book_list
-            
+
         
     def transfer(self, writer_id, coin):
         if self.search_writer(writer_id) is not None:

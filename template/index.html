@@ -13,8 +13,8 @@
         <h1>Bailan</h1>
             <!--ช่องค้นหา-->
             <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button>Search</button>
+                <input id="search_by_name" type="text" placeholder="Search...">
+                <button onclick="search_by_name()">Search</button>
             </div>
             <!--ตระกร้า -->
             <div class="cart-container">
@@ -35,7 +35,9 @@
 
     <section id="หน้าแรก">
         <h2>หน้าแรก</h2>
-        <!-- Add your featured books here -->
+        <div id="content">
+
+        </div>
     </section>
 
     <section id="ขายดี">
@@ -62,5 +64,7 @@
         <p>Contact Us:</p>
         <!-- Add your contact information here -->
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>
