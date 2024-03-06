@@ -168,9 +168,11 @@ async def upload_book(writer_id : int , book_detail : Uploadbook) -> dict:
     controller.upload_book(book,writer)
     return {"Book's List" : controller.book_of_writer(writer)}
 
-# @app.get("/ShowBookWhenUploadBook", tags=["Writer's Book"]) #ดูคลังหนังสือที่ตัวเองแต่ง ใช้ไม่ได้
-# async def show_book_when_upload_book(writer_name: str) -> dict:
-#     return {"Book's list" : controller.book_of_writer(writer_name)}
+@app.get("/ShowBookWhenUploadBook", tags=["Writer's Book"]) #ดูคลังหนังสือที่ตัวเองแต่ง
+async def show_book_when_upload_book(writer_id: int) -> dict:
+    if controller.search_writer(writer_id) is not None:
+        writer = controller.search_writer(writer_id)
+    return {"Book's list" : controller.book_of_writer(writer)}
     
 @app.get("/Show_Book_Collection_of_Reader", tags=["Reader's Book"])
 async def Show_Book_Collection_of_Reader(Reader_id:int) -> dict:
