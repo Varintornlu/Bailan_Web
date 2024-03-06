@@ -1,6 +1,6 @@
-from Book_class import Book
-from PaymentHistory import PaymentHistory
-from Coin_transection_class import Coin_transaction
+from routers.Book_class import Book
+from routers.PaymentHistory import PaymentHistory
+from routers.Coin_transection_class import Coin_transaction
 
 class Account:
     def __init__(self, account_name, password):
@@ -127,10 +127,9 @@ class Writer(Account):
     def book_collection_list(self):
         return self.__book_collection_list
     
-    @book_collection_list.setter
-    def book_collection_list(self,name, writer, book_type, price_coin, intro, content):
-        book = Book(name, writer, book_type, price_coin, intro, content)
-        self.__book_collection_list.append(book)
+    # @book_collection_list.setter
+    # def book_collection_list(self,book):
+    #     self.__book_collection_list.append(book)
     
     @property
     def coin_transaction_history_list(self):

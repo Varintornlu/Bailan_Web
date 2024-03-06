@@ -1,7 +1,7 @@
-from BookStatus_class import BookStatus
-from Review_class import Review
+from routers.BookStatus_class import BookStatus
+from routers.Review_class import Review
 import datetime
-
+ 
 class Book:
     def __init__(self, name, book_type, price_coin, intro, content):
         self.__name = name

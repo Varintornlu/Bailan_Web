@@ -1,6 +1,6 @@
 import datetime
-from BookStatus_class import BookStatus
-from Review_class import Review
+from routers.BookStatus_class import BookStatus
+from routers.Review_class import Review
 
 class Controller:
     def __init__(self):
@@ -390,4 +390,3 @@ class Controller:
             return comment_list
         
         return "Not have comment"
-

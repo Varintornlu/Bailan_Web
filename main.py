@@ -3,13 +3,13 @@ from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
-from Controller_class import Controller
-from Account_class import Reader
-from Account_class import Writer
-from Book_class import Book
-from Review_class import Review
-from Promotion_class import Promotion
-from Coin_transection_class import Coin_transaction
+from routers.Controller_class import Controller
+from routers.Account_class import Reader
+from routers.Account_class import Writer
+from routers.Book_class import Book
+from routers.Review_class import Review
+from routers.Promotion_class import Promotion
+from routers.Coin_transection_class import Coin_transaction
 
 app = FastAPI()
 
@@ -146,7 +146,7 @@ async def search_book(book_name:str = None, writer_name:str = None , type:str = 
 
 class Uploadbook(BaseModel):
     name: str
-    writer: str 
+    #writer: str 
     book_type: str
     price_coin: int
     intro: str
@@ -154,19 +154,24 @@ class Uploadbook(BaseModel):
 
 #upload = []
 
-@app.post("/upload_book", tags=["Upload Book"])
-async def upload_book(writer_name: str, writer_password: str, book_detail: Uploadbook) -> dict:
-    writer_info = Writer(writer_name, writer_password)
-    writer_id = Writer.id_account
-    book_detail.writer = writer_name
-    #upload.append(book_detail.dict())
+# @app.post("/upload_book", tags=["Upload Book"])
+# async def upload_book(writer_name: str, writer_password: str, book_detail: Uploadbook) -> dict:
+#     writer_info = Writer(writer_name, writer_password)
+#     writer_id = Writer.id_account
+#     book_detail.writer = writer_name
+#     #upload.append(book_detail.dict())
+#     book = Book(book_detail.name,book_detail.book_type,book_detail.price_coin,book_detail.intro,book_detail.content)
+#     book.writer = writer_info
+#     controller.add_book(book)
+#     # return {f"message": "Upload Book Success"}
+#     return {"Book's list" : controller.book_of_writer(writer_id)}
+@app.post("/Upload Book",tags = ["Upload Book"]) #Error
+async def upload_book(writer_id : int , book_detail : Uploadbook) -> dict:
+    if controller.search_writer(writer_id) is not None:
+        writer = controller.search_writer(writer_id)
     book = Book(book_detail.name,book_detail.book_type,book_detail.price_coin,book_detail.intro,book_detail.content)
-    book.writer = writer_info
-    controller.add_book(book)
-    # return {f"message": "Upload Book Success"}
-    return {"Book's list" : controller.book_of_writer(writer_id)}
-
-
+    controller.upload_book(book,writer)
+    return {"Book's List" : controller.book_of_writer(writer)}
 
 # @app.get("/ShowBookWhenUploadBook", tags=["Writer's Book"]) #ดูคลังหนังสือที่ตัวเองแต่ง ใช้ไม่ได้
 # async def show_book_when_upload_book(writer_name: str) -> dict:
@@ -216,3 +221,4 @@ async def view_comment(Book_id : int) -> dict:
 # print(controller.cointrasaction_history(1))
 print(controller.submit_comment(1,1,"Bad Book"))
 print(controller.view_comment(1))
+
